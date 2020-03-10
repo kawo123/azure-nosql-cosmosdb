@@ -2,22 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "baseName": {
-            "type": "string",
-            "maxLength": 10,
-            "minLength": 3,
-            "defaultValue": "nosql",
-            "metadata": {
-                "description": "The base name to use as prefix to create all the resources."
-            }
-        },
-        "location": {
-            "type": "string",
-            "defaultValue": "eastus",
-            "metadata": {
-                "description": "Specifies the location for all resources."
-            }
-        }
+
     },
     "variables": {},
     "resources": [
