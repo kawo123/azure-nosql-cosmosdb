@@ -14,26 +14,27 @@
             "type": "string",
             "defaultValue": "[resourceGroup().location]",
             "metadata": {
-                "description": "Location for the Cosmos DB account."
+                "description": "Location for the Azure SQL Server."
             }
         },
         "sqlAdministratorLogin": {
             "type": "string",
             "defaultValue": "sqladmin",
             "metadata": {
-                "description": "Login user name for the Azure SQL Database. Should use securestring for production."
+                "description": "Login user name for the Azure SQL Server. Should use securestring for production."
             }
         },
         "sqlAdministratorLoginPassword": {
             "type": "string",
             "defaultValue": "Password123",
             "metadata": {
-                "description": "Login password for the Azure SQL Database. Should use securestring for production."
+                "description": "Login password for the Azure SQL Server. Should use securestring for production."
             }
         }
     },
     "variables": {
-        "sqlserverName": "[toLower(concat(parameters('baseName'),'-sqlsrv'))]"
+        "sqlserverName": "[toLower(concat(parameters('baseName'),'-sqlsrv'))]",
+        "databaseName": "Movies"
     },
     "resources": [
         {
@@ -74,6 +75,18 @@
         "sqlserverName": {
             "type": "string",
             "value": "[variables('sqlserverName')]"
+        },
+        "databaseName": {
+            "type": "string",
+            "value": "[variables('databaseName')]"
+        },
+        "sqlAdministratorLogin": {
+            "type": "string",
+            "value": "[parameters('sqlAdministratorLogin')]"
+        },
+        "sqlAdministratorLoginPassword": {
+            "type": "string",
+            "value": "[parameters('sqlAdministratorLoginPassword')]"
         }
     }
 }

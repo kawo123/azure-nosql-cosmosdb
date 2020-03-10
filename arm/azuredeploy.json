@@ -80,6 +80,38 @@
                     }
                 }
             }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-05-01",
+            "name": "appservice-linked-template",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[uri(deployment().properties.templateLink.uri, 'appservice.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "baseName": {
+                        "value": "[parameters('baseName')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "sqlserverName": {
+                        "value": "[reference('sqldb-linked-template').outputs.sqlserverName.value]"
+                    },
+                    "databaseName": {
+                        "value": "[reference('sqldb-linked-template').outputs.databaseName.value]"
+                    },
+                    "sqlAdministratorLogin": {
+                        "value": "[reference('sqldb-linked-template').outputs.sqlAdministratorLogin.value]"
+                    },
+                    "sqlAdministratorLoginPassword": {
+                        "value": "[reference('sqldb-linked-template').outputs.sqlAdministratorLoginPassword.value]"
+                    }
+                }
+            }
         }
     ]
 }
