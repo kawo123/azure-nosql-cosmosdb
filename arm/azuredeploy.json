@@ -113,5 +113,23 @@
                 }
             }
         }
-    ]
+    ],
+    "outputs": {
+        "sqlserverName": {
+            "type": "string",
+            "value": "[reference('sqldb-linked-template').outputs.sqlserverName.value]"
+        },
+        "databaseName": {
+            "type": "string",
+            "value": "[reference('sqldb-linked-template').outputs.databaseName.value]"
+        },
+        "sqlAdministratorLogin": {
+            "type": "string",
+            "value": "[reference('sqldb-linked-template').outputs.sqlAdministratorLogin.value]"
+        },
+        "sqlAdministratorLoginPassword": {
+            "type": "string",
+            "value": "[reference('sqldb-linked-template').outputs.sqlAdministratorLoginPassword.value]"
+        }
+    }
 }
