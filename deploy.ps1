@@ -1,9 +1,9 @@
-# Enter the base name for Azure resources
+# Enter the base name for Azure resources (i.e. nosql)
 $baseName = "nosql"
-# Enter the first Resource Group name (i.e. nosql-rg)
-$resourceGroup1Name = $baseName + "-rg"
 # Enter the location for the first resource group (i.e. eastus)
 $location1 = "eastus"
+
+$resourceGroup1Name = $baseName + "-rg"
 
 New-AzResourceGroup -Name $resourceGroup1Name -Location $location1
 
@@ -12,7 +12,7 @@ $templateUri = "https://raw.githubusercontent.com/kawo123/azure-nosql-cosmosdb/m
 $outputs = New-AzResourceGroupDeployment `
     -ResourceGroupName $resourceGroup1Name `
     -TemplateUri $templateUri `
-    -baseName $resourceGroup1Name `
+    -baseName $baseName `
     -location $location1
 
 $sqlserverName = $outputs.Outputs["sqlserverName"].value

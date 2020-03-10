@@ -10,7 +10,7 @@ This project demostrates the capabilities of Azure Cosmos DB
 
 - Clone the repository
 
-- TODO
+- Follow [deployment instructions](./docs/deployment_instructions.md) to deploy Azure resources
 
 ## References
 
@@ -18,7 +18,6 @@ This project demostrates the capabilities of Azure Cosmos DB
 
 ## Next Steps
 
-- [] IaC: Azure Cosmos DB
 - [] IaC: Azure Data Factory
 - [] Data Migration
 - [] DB Optimization
