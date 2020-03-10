@@ -4,8 +4,6 @@
     "parameters": {
         "baseName": {
             "type": "string",
-            "maxLength": 10,
-            "minLength": 3,
             "defaultValue": "nosql",
             "metadata": {
                 "description": "The base name to use as prefix to create all the resources."
