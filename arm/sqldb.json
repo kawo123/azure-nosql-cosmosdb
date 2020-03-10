@@ -1,0 +1,79 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "baseName": {
+            "type": "string",
+            "maxLength": 10,
+            "minLength": 3,
+            "metadata": {
+                "description": "The base name to use as prefix to create all the resources."
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for the Cosmos DB account."
+            }
+        },
+        "sqlAdministratorLogin": {
+            "type": "string",
+            "defaultValue": "sqladmin",
+            "metadata": {
+                "description": "Login user name for the Azure SQL Database. Should use securestring for production."
+            }
+        },
+        "sqlAdministratorLoginPassword": {
+            "type": "string",
+            "defaultValue": "Password123",
+            "metadata": {
+                "description": "Login password for the Azure SQL Database. Should use securestring for production."
+            }
+        }
+    },
+    "variables": {
+        "sqlserverName": "[toLower(concat(parameters('baseName'),'-sqlsrv'))]"
+    },
+    "resources": [
+        {
+            "name": "[variables('sqlserverName')]",
+            "type": "Microsoft.Sql/servers",
+            "location": "[parameters('location')]",
+            "tags": {
+                "displayName": "SqlServer"
+            },
+            "apiVersion": "2014-04-01",
+            "properties": {
+                "administratorLogin": "[parameters('sqlAdministratorLogin')]",
+                "administratorLoginPassword": "[parameters('sqlAdministratorLoginPassword')]",
+                "version": "12.0"
+            },
+            "resources": [
+                {
+                    "type": "firewallrules",
+                    "apiVersion": "2014-04-01",
+                    "dependsOn": [
+                        "[variables('sqlserverName')]"
+                    ],
+                    "location": "[parameters('location')]",
+                    "name": "AllowAllWindowsAzureIps",
+                    "properties": {
+                        "endIpAddress": "255.255.255.255",
+                        "startIpAddress": "0.0.0.0"
+                    }
+                }
+            ]
+        }
+    ],
+    "outputs": {
+        "sqlSvrFqdn": {
+            "type": "string",
+            "value": "[reference(concat('Microsoft.Sql/servers/', variables('sqlserverName'))).fullyQualifiedDomainName]"
+        },
+        "sqlserverName": {
+            "type": "string",
+            "value": "[variables('sqlserverName')]"
+        }
+    }
+}
