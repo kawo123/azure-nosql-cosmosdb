@@ -19,7 +19,7 @@
         }
     },
     "variables": {
-        "namespaceName": "[toLower(concat(parameters('baseName'),'-cosmos'))]",
+        "namespaceName": "[toLower(concat(parameters('baseName'),'-ehns'))]",
         "eventhubSku": "Standard",
         "skuCapacity": 1,
         "eventHubName": "telemetry",

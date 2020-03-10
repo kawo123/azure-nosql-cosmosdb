@@ -98,6 +98,9 @@
                     "location": {
                         "value": "[parameters('location')]"
                     },
+                    "sqlSvrFqdn": {
+                        "value": "[reference('sqldb-linked-template').outputs.sqlSvrFqdn.value]"
+                    },
                     "sqlserverName": {
                         "value": "[reference('sqldb-linked-template').outputs.sqlserverName.value]"
                     },
