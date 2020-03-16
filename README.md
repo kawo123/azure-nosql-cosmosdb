@@ -12,6 +12,8 @@ This project demostrates the capabilities of Azure Cosmos DB
 
 - Follow [deployment instructions](./docs/deployment_instructions.md) to deploy Azure resources
 
+- Follow [data generator instructions](./docs/data_generator_instructions.md) to generate dummy events
+
 ## References
 
 - [Azure Cosmos DB Overview](https://docs.microsoft.com/en-us/azure/cosmos-db/distribute-data-globally)
