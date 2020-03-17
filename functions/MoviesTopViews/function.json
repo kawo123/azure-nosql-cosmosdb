@@ -1,0 +1,51 @@
+{
+    "bindings": [
+        {
+            "name": "triggerDocument",
+            "type": "cosmosDBTrigger",
+            "direction": "in",
+            "leaseCollectionName": "leases",
+            "connectionStringSetting": "CosmosDBConnection",
+            "databaseName": "MoviesDB",
+            "collectionName": "Items",
+            "createLeaseCollectionIfNotExists": true
+        },
+        {
+            "name": "inputTop10Movies",
+            "type": "cosmosDB",
+            "databaseName": "MoviesDB",
+            "collectionName": "Items",
+            "sqlQuery": "SELECT TOP 10 * FROM c ORDER BY c.Popularity DESC",
+            "connectionStringSetting": "CosmosDBConnection",
+            "direction": "in"
+        },
+        {
+            "name": "inputMovieCategories",
+            "type": "cosmosDB",
+            "databaseName": "MoviesDB",
+            "collectionName": "Categories",
+            "sqlQuery": "SELECT * FROM c",
+            "connectionStringSetting": "CosmosDBConnection",
+            "direction": "in"
+        },
+        {
+            "name": "inputMovieCategoriesPopularity",
+            "type": "cosmosDB",
+            "databaseName": "MoviesDB",
+            "collectionName": "Items",
+            "sqlQuery": "SELECT VALUE root FROM (SELECT c.CategoryId, SUM(c.Popularity) as Popularity FROM c GROUP BY c.CategoryId) as root",
+            "connectionStringSetting": "CosmosDBConnection",
+            "direction": "in"
+        },
+        {
+            "name": "outputDocuments",
+            "type": "cosmosDB",
+            "databaseName": "MoviesDB",
+            "collectionName": "Views",
+            "createIfNotExists": false,
+            "partitionKey": "/id",
+            "connectionStringSetting": "CosmosDBConnection",
+            "direction": "out"
+        }
+    ]
+}

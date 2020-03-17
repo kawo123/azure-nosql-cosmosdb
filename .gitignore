@@ -1,3 +1,7 @@
+# Azure Functions objects
+functions/bin/
+functions/obj/
+
 # Terraform
 .terraform/
 terraform/*.tfstate

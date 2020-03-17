@@ -17,12 +17,13 @@ This project demostrates the capabilities of Azure Cosmos DB
 ## References
 
 - [Azure Cosmos DB Overview](https://docs.microsoft.com/en-us/azure/cosmos-db/distribute-data-globally)
+- [Contoso Video SQL Server Schema](https://github.com/kawo123/nosql-openhack/blob/master/database-schema/README.md)
 
 ## Next Steps
 
 - [] IaC: Azure Data Factory
-- [] Data Migration
-- [] DB Optimization
+- [] IaC: Azure Stream Analytics
+- [] IaC: Azure Functions
 - [] DB Schema Before & After + requirements
 - [] DR
 
