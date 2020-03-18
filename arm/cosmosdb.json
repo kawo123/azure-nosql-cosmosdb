@@ -214,7 +214,7 @@
         },
         "accountKey": {
             "type": "string",
-            "value": "[listKeys(resourceId('Microsoft.DocumentDB/databaseAccounts', variables('accountName')), '2019-12-12').keys[0].value]"
+            "value": "[listKeys(resourceId('Microsoft.DocumentDB/databaseAccounts', variables('accountName')), '2019-12-12').primaryMasterKey.value]"
         },
         "databaseName": {
             "type": "string",
