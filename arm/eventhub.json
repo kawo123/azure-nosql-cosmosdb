@@ -103,7 +103,7 @@
         },
         "ehAuthRuleKey": {
             "type": "string",
-            "value": "[listKeys(resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules', variables('namespaceName'), variables('eventHubName'), variables('ehAuthRuleName')), '2017-04-01').primaryKey.value]"
+            "value": "[listKeys(resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules', variables('namespaceName'), variables('eventHubName'), variables('ehAuthRuleName')), '2017-04-01').primaryKey]"
         }
     }
 }
