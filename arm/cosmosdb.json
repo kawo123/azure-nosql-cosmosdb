@@ -189,25 +189,6 @@
         },
         {
             "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
-            "name": "[concat(variables('accountName'), '/', variables('databaseName'), '/', variables('ItemsContainerName'))]",
-            "apiVersion": "2019-08-01",
-            "dependsOn": [
-                "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', variables('accountName'), variables('databaseName'))]"
-            ],
-            "properties": {
-                "resource": {
-                    "id": "[variables('ItemsContainerName')]",
-                    "partitionKey": {
-                        "paths": [
-                            "/CategoryId"
-                        ],
-                        "kind": "Hash"
-                    }
-                }
-            }
-        },
-        {
-            "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
             "name": "[concat(variables('accountName'), '/', variables('databaseName'), '/', variables('ViewsContainerName'))]",
             "apiVersion": "2019-08-01",
             "dependsOn": [
