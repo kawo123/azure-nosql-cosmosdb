@@ -1,0 +1,156 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "baseName": {
+            "type": "string",
+            "maxLength": 10,
+            "minLength": 3,
+            "metadata": {
+                "description": "The base name to use as prefix to create all the resources."
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Specifies the Azure location for all resources."
+            }
+        },
+        "ehNamespaceName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of Azure Event Hub namespace."
+            }
+        },
+        "ehName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of Event Hub."
+            }
+        },
+        "ehAuthRuleName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of Event Hub shared access policy."
+            }
+        },
+        "cosmosAccountName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of Azure Cosmos DB account."
+            }
+        },
+        "cosmosDatabaseName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of Azure Cosmos DB database."
+            }
+        },
+        "cosmosCollectionName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of Azure Cosmos DB collection."
+            }
+        }
+    },
+    "variables": {
+        "streamAnalyticsJobName": "[toLower(concat(parameters('baseName'),'-asa-agg'))]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.StreamAnalytics/StreamingJobs",
+            "apiVersion": "2016-03-01",
+            "name": "[variables('streamAnalyticsJobName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "sku": {
+                    "name": "standard"
+                },
+                "eventsOutOfOrderPolicy": "adjust",
+                "outputErrorPolicy": "stop",
+                "eventsOutOfOrderMaxDelayInSeconds": 0,
+                "eventsLateArrivalMaxDelayInSeconds": 5,
+                "dataLocale": "en-US",
+                "compatibilityLevel": "1.2"
+            }
+        },
+        {
+            "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
+            "apiVersion": "2016-03-01",
+            "name": "[concat(variables('streamAnalyticsJobName'), '/inputEh')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.StreamAnalytics/streamingjobs', variables('streamAnalyticsJobName'))]"
+            ],
+            "properties": {
+                "type": "Stream",
+                "datasource": {
+                    "type": "Microsoft.ServiceBus/EventHub",
+                    "properties": {
+                        "eventHubName": "[parameters('ehName')]",
+                        "serviceBusNamespace": "[parameters('ehNamespaceName')]",
+                        "sharedAccessPolicyName": "[parameters('ehAuthRuleName')]"
+                    }
+                },
+                "serialization": {
+                    "type": "Json",
+                    "properties": {
+                        "encoding": "UTF8"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+            "apiVersion": "2016-03-01",
+            "name": "[concat(variables('streamAnalyticsJobName'), '/outputCosmosDbDailySummary')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.StreamAnalytics/streamingjobs', variables('streamAnalyticsJobName'))]"
+            ],
+            "properties": {
+                "datasource": {
+                    "type": "Microsoft.Storage/DocumentDB",
+                    "properties": {
+                        "accountId": "[parameters('cosmosAccountName')]",
+                        "database": "[parameters('cosmosDatabaseName')]",
+                        "collectionNamePattern": "[parameters('cosmosCollectionName')]",
+                        "documentId": "id"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
+            "apiVersion": "2016-03-01",
+            "name": "[concat(variables('streamAnalyticsJobName'), '/outputCosmosDbHourlySummary')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.StreamAnalytics/streamingjobs', variables('streamAnalyticsJobName'))]"
+            ],
+            "properties": {
+                "datasource": {
+                    "type": "Microsoft.Storage/DocumentDB",
+                    "properties": {
+                        "accountId": "[parameters('cosmosAccountName')]",
+                        "database": "[parameters('cosmosDatabaseName')]",
+                        "collectionNamePattern": "[parameters('cosmosCollectionName')]",
+                        "documentId": "id"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.StreamAnalytics/streamingjobs/transformations",
+            "apiVersion": "2016-03-01",
+            "name": "[concat(variables('streamAnalyticsJobName'), '/query')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.StreamAnalytics/streamingjobs', variables('streamAnalyticsJobName'))]"
+            ],
+            "properties": {
+                "streamingUnits": 3,
+                "query": "SELECT\r\n    'order-count-in-this-hour' as id,\r\n    COUNT(*) as [Count],\r\n    System.Timestamp() AS WindowEnd\r\nINTO\r\n    outputCosmosDbHourlySummary\r\nFROM\r\n    inputEh\r\nGROUP BY TumblingWindow(hour, 1)\r\n\r\nSELECT\r\n    'daily-summary' as id,\r\n    COUNT(*) as [dailyCount],\r\n    SUM(Total) as [dailyTotal],\r\n    System.Timestamp() AS WindowEnd\r\nINTO\r\n    outputCosmosDbDailySummary\r\nFROM\r\n    inputEh\r\nGROUP BY TumblingWindow(day, 1)\r\n"
+            }
+        }
+    ],
+    "outputs": {
+    }
+}
