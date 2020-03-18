@@ -60,7 +60,7 @@
     "resources": [
         {
             "type": "Microsoft.StreamAnalytics/StreamingJobs",
-            "apiVersion": "2016-03-01",
+            "apiVersion": "2017-04-01-preview",
             "name": "[variables('streamAnalyticsJobName')]",
             "location": "[parameters('location')]",
             "properties": {
@@ -77,7 +77,7 @@
         },
         {
             "type": "Microsoft.StreamAnalytics/streamingjobs/inputs",
-            "apiVersion": "2016-03-01",
+            "apiVersion": "2017-04-01-preview",
             "name": "[concat(variables('streamAnalyticsJobName'), '/inputEh')]",
             "dependsOn": [
                 "[resourceId('Microsoft.StreamAnalytics/streamingjobs', variables('streamAnalyticsJobName'))]"
@@ -102,7 +102,7 @@
         },
         {
             "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
-            "apiVersion": "2016-03-01",
+            "apiVersion": "2017-04-01-preview",
             "name": "[concat(variables('streamAnalyticsJobName'), '/outputCosmosDbDailySummary')]",
             "dependsOn": [
                 "[resourceId('Microsoft.StreamAnalytics/streamingjobs', variables('streamAnalyticsJobName'))]"
@@ -121,7 +121,7 @@
         },
         {
             "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
-            "apiVersion": "2016-03-01",
+            "apiVersion": "2017-04-01-preview",
             "name": "[concat(variables('streamAnalyticsJobName'), '/outputCosmosDbHourlySummary')]",
             "dependsOn": [
                 "[resourceId('Microsoft.StreamAnalytics/streamingjobs', variables('streamAnalyticsJobName'))]"
@@ -140,7 +140,7 @@
         },
         {
             "type": "Microsoft.StreamAnalytics/streamingjobs/transformations",
-            "apiVersion": "2016-03-01",
+            "apiVersion": "2017-04-01-preview",
             "name": "[concat(variables('streamAnalyticsJobName'), '/query')]",
             "dependsOn": [
                 "[resourceId('Microsoft.StreamAnalytics/streamingjobs', variables('streamAnalyticsJobName'))]"
