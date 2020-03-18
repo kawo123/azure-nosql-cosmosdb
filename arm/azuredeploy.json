@@ -84,6 +84,26 @@
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2018-05-01",
+            "name": "storage-linked-template",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[uri(deployment().properties.templateLink.uri, 'storage.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "baseName": {
+                        "value": "[parameters('baseName')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-05-01",
             "name": "appservice-linked-template",
             "properties": {
                 "mode": "Incremental",
@@ -112,6 +132,35 @@
                     },
                     "sqlAdministratorLoginPassword": {
                         "value": "[reference('sqldb-linked-template').outputs.sqlAdministratorLoginPassword.value]"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-05-01",
+            "name": "datafactory-linked-template",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[uri(deployment().properties.templateLink.uri, 'datafactory.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "baseName": {
+                        "value": "[parameters('baseName')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "LS_CosmosDb_connectionString": {
+                        "value": "[reference('cosmosdb-linked-template').outputs.cosmosDbConnectionString.value]"
+                    },
+                    "LS_AzureSqlDb_connectionString": {
+                        "value": "[reference('sqldb-linked-template').outputs.sqlDbConnectionString.value]"
+                    },
+                    "LS_AzureBlobStorage_connectionString": {
+                        "value": "[reference('storage-linked-template').outputs.storageAccountConnectionString.value]"
                     }
                 }
             }
