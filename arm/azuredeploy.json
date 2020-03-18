@@ -164,6 +164,44 @@
                     }
                 }
             }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-05-01",
+            "name": "streamanalytics-linked-template",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[uri(deployment().properties.templateLink.uri, 'streamanalytics.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "baseName": {
+                        "value": "[parameters('baseName')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "ehNamespaceName": {
+                        "value": "[reference('eventhub-linked-template').outputs.namespaceName.value]"
+                    },
+                    "ehName": {
+                        "value": "[reference('eventhub-linked-template').outputs.eventHubName.value]"
+                    },
+                    "ehAuthRuleName": {
+                        "value": "[reference('eventhub-linked-template').outputs.ehAuthRuleName.value]"
+                    },
+                    "cosmosAccountName": {
+                        "value": "[reference('cosmosdb-linked-template').outputs.accountName.value]"
+                    },
+                    "cosmosDatabaseName": {
+                        "value": "[reference('cosmosdb-linked-template').outputs.databaseName.value]"
+                    },
+                    "cosmosCollectionName": {
+                        "value": "[reference('cosmosdb-linked-template').outputs.ViewsContainerName.value]"
+                    }
+                }
+            }
         }
     ],
     "outputs": {
