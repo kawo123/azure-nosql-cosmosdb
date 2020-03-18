@@ -45,7 +45,7 @@
             }
         },
         {
-            "name": "[concat(parameters('factoryName'), '/PL_Migrate_AzureSql_To_CosmosDb')]",
+            "name": "[concat(variables('factoryName'), '/PL_Migrate_AzureSql_To_CosmosDb')]",
             "type": "Microsoft.DataFactory/factories/pipelines",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -222,7 +222,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/PL_Copy_Orders')]",
+            "name": "[concat(variables('factoryName'), '/PL_Copy_Orders')]",
             "type": "Microsoft.DataFactory/factories/pipelines",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -333,7 +333,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/DS_AzureSqlTable_Item')]",
+            "name": "[concat(variables('factoryName'), '/DS_AzureSqlTable_Item')]",
             "type": "Microsoft.DataFactory/factories/datasets",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -422,7 +422,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/DS_CosmosDbSqlApiCollection_Items')]",
+            "name": "[concat(variables('factoryName'), '/DS_CosmosDbSqlApiCollection_Items')]",
             "type": "Microsoft.DataFactory/factories/datasets",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -443,7 +443,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/DS_AzureSqlTable_ItemAggregate')]",
+            "name": "[concat(variables('factoryName'), '/DS_AzureSqlTable_ItemAggregate')]",
             "type": "Microsoft.DataFactory/factories/datasets",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -495,7 +495,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/DS_CosmosDbSqlApiCollection_Users')]",
+            "name": "[concat(variables('factoryName'), '/DS_CosmosDbSqlApiCollection_Users')]",
             "type": "Microsoft.DataFactory/factories/datasets",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -516,7 +516,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/DS_AzureSqlTable_User')]",
+            "name": "[concat(variables('factoryName'), '/DS_AzureSqlTable_User')]",
             "type": "Microsoft.DataFactory/factories/datasets",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -561,7 +561,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/DS_AzureSqlTable_Category')]",
+            "name": "[concat(variables('factoryName'), '/DS_AzureSqlTable_Category')]",
             "type": "Microsoft.DataFactory/factories/datasets",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -601,7 +601,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/DS_CosmosDbSqlApiCollection_Categories')]",
+            "name": "[concat(variables('factoryName'), '/DS_CosmosDbSqlApiCollection_Categories')]",
             "type": "Microsoft.DataFactory/factories/datasets",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -622,7 +622,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/DS_AzureSqlTable_Event')]",
+            "name": "[concat(variables('factoryName'), '/DS_AzureSqlTable_Event')]",
             "type": "Microsoft.DataFactory/factories/datasets",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -686,7 +686,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/DS_CosmosDbSqlApiCollection_Events')]",
+            "name": "[concat(variables('factoryName'), '/DS_CosmosDbSqlApiCollection_Events')]",
             "type": "Microsoft.DataFactory/factories/datasets",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -707,7 +707,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/DS_AzureSqlTable_Orders')]",
+            "name": "[concat(variables('factoryName'), '/DS_AzureSqlTable_Orders')]",
             "type": "Microsoft.DataFactory/factories/datasets",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -803,7 +803,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/DS_CosmosDbSqlApiCollection_Orders')]",
+            "name": "[concat(variables('factoryName'), '/DS_CosmosDbSqlApiCollection_Orders')]",
             "type": "Microsoft.DataFactory/factories/datasets",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -824,7 +824,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/DS_AzureSqlTable_OrderDetails')]",
+            "name": "[concat(variables('factoryName'), '/DS_AzureSqlTable_OrderDetails')]",
             "type": "Microsoft.DataFactory/factories/datasets",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -877,7 +877,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/DS_AzureBlob_Orders_CSV')]",
+            "name": "[concat(variables('factoryName'), '/DS_AzureBlob_Orders_CSV')]",
             "type": "Microsoft.DataFactory/factories/datasets",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -966,7 +966,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/DS_AzureBlob_Orders_JSON')]",
+            "name": "[concat(variables('factoryName'), '/DS_AzureBlob_Orders_JSON')]",
             "type": "Microsoft.DataFactory/factories/datasets",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -991,7 +991,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/LS_CosmosDb')]",
+            "name": "[concat(variables('factoryName'), '/LS_CosmosDb')]",
             "type": "Microsoft.DataFactory/factories/linkedServices",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -1006,7 +1006,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/LS_AzureSqlDb')]",
+            "name": "[concat(variables('factoryName'), '/LS_AzureSqlDb')]",
             "type": "Microsoft.DataFactory/factories/linkedServices",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -1021,7 +1021,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/LS_AzureBlobStorage')]",
+            "name": "[concat(variables('factoryName'), '/LS_AzureBlobStorage')]",
             "type": "Microsoft.DataFactory/factories/linkedServices",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -1036,7 +1036,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/MDF_Items')]",
+            "name": "[concat(variables('factoryName'), '/MDF_Items')]",
             "type": "Microsoft.DataFactory/factories/dataflows",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -1089,7 +1089,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/MDF_Users')]",
+            "name": "[concat(variables('factoryName'), '/MDF_Users')]",
             "type": "Microsoft.DataFactory/factories/dataflows",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -1124,7 +1124,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/MDF_Categories')]",
+            "name": "[concat(variables('factoryName'), '/MDF_Categories')]",
             "type": "Microsoft.DataFactory/factories/dataflows",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -1159,7 +1159,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/MDF_Events')]",
+            "name": "[concat(variables('factoryName'), '/MDF_Events')]",
             "type": "Microsoft.DataFactory/factories/dataflows",
             "apiVersion": "2018-06-01",
             "properties": {
@@ -1194,7 +1194,7 @@
             ]
         },
         {
-            "name": "[concat(parameters('factoryName'), '/MDF_Orders')]",
+            "name": "[concat(variables('factoryName'), '/MDF_Orders')]",
             "type": "Microsoft.DataFactory/factories/dataflows",
             "apiVersion": "2018-06-01",
             "properties": {
