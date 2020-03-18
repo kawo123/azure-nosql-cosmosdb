@@ -21,7 +21,6 @@ This project demostrates the capabilities of Azure Cosmos DB
 
 ## Next Steps
 
-- [] IaC: Azure Data Factory
 - [] IaC: Azure Stream Analytics
 - [] IaC: Azure Functions
 - [] DB Schema Before & After + requirements

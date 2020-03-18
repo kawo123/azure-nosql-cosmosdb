@@ -208,6 +208,18 @@
         }
     ],
     "outputs": {
+        "accountName": {
+            "type": "string",
+            "value": "[variables('accountName')]"
+        },
+        "databaseName": {
+            "type": "string",
+            "value": "[variables('databaseName')]"
+        },
+        "ViewsContainerName": {
+            "type": "string",
+            "value": "[variables('ViewsContainerName')]"
+        },
         "cosmosDbConnectionString": {
             "type": "string",
             "value": "[listConnectionStrings(resourceId('Microsoft.DocumentDB/databaseAccounts', variables('accountName')), '2019-12-12').connectionStrings[0].connectionString]"
