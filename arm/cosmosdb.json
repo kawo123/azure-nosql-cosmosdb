@@ -30,7 +30,13 @@
     "variables": {
         "accountName": "[toLower(concat(parameters('baseName'),'-cosmos'))]",
 		"databaseName": "MoviesDB",
-		"ItemsContainerName": "Items"
+		"CartItemsContainerName": "CartItems",
+		"CategoriesContainerName": "Categories",
+		"EventsContainerName": "Events",
+		"ItemsContainerName": "Items",
+		"OrdersContainerName": "Orders",
+		"UsersContainerName": "Users",
+		"ViewsContainerName": "Views"
     },
     "resources": [
         {
@@ -69,6 +75,63 @@
         },
         {
             "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
+            "name": "[concat(variables('accountName'), '/', variables('databaseName'), '/', variables('CartItemsContainerName'))]",
+            "apiVersion": "2019-08-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', variables('accountName'), variables('databaseName'))]"
+            ],
+            "properties": {
+                "resource": {
+                    "id": "[variables('CartItemsContainerName')]",
+                    "partitionKey": {
+                        "paths": [
+                            "/CartId"
+                        ],
+                        "kind": "Hash"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
+            "name": "[concat(variables('accountName'), '/', variables('databaseName'), '/', variables('CategoriesContainerName'))]",
+            "apiVersion": "2019-08-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', variables('accountName'), variables('databaseName'))]"
+            ],
+            "properties": {
+                "resource": {
+                    "id": "[variables('CategoriesContainerName')]",
+                    "partitionKey": {
+                        "paths": [
+                            "/CategoryId"
+                        ],
+                        "kind": "Hash"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
+            "name": "[concat(variables('accountName'), '/', variables('databaseName'), '/', variables('EventsContainerName'))]",
+            "apiVersion": "2019-08-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', variables('accountName'), variables('databaseName'))]"
+            ],
+            "properties": {
+                "resource": {
+                    "id": "[variables('EventsContainerName')]",
+                    "partitionKey": {
+                        "paths": [
+                            "/userId"
+                        ],
+                        "kind": "Hash"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
             "name": "[concat(variables('accountName'), '/', variables('databaseName'), '/', variables('ItemsContainerName'))]",
             "apiVersion": "2019-08-01",
             "dependsOn": [
@@ -80,6 +143,82 @@
                     "partitionKey": {
                         "paths": [
                             "/CategoryId"
+                        ],
+                        "kind": "Hash"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
+            "name": "[concat(variables('accountName'), '/', variables('databaseName'), '/', variables('OrdersContainerName'))]",
+            "apiVersion": "2019-08-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', variables('accountName'), variables('databaseName'))]"
+            ],
+            "properties": {
+                "resource": {
+                    "id": "[variables('OrdersContainerName')]",
+                    "partitionKey": {
+                        "paths": [
+                            "/OrderID"
+                        ],
+                        "kind": "Hash"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
+            "name": "[concat(variables('accountName'), '/', variables('databaseName'), '/', variables('UsersContainerName'))]",
+            "apiVersion": "2019-08-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', variables('accountName'), variables('databaseName'))]"
+            ],
+            "properties": {
+                "resource": {
+                    "id": "[variables('UsersContainerName')]",
+                    "partitionKey": {
+                        "paths": [
+                            "/UserId"
+                        ],
+                        "kind": "Hash"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
+            "name": "[concat(variables('accountName'), '/', variables('databaseName'), '/', variables('ItemsContainerName'))]",
+            "apiVersion": "2019-08-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', variables('accountName'), variables('databaseName'))]"
+            ],
+            "properties": {
+                "resource": {
+                    "id": "[variables('ItemsContainerName')]",
+                    "partitionKey": {
+                        "paths": [
+                            "/CategoryId"
+                        ],
+                        "kind": "Hash"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
+            "name": "[concat(variables('accountName'), '/', variables('databaseName'), '/', variables('ViewsContainerName'))]",
+            "apiVersion": "2019-08-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', variables('accountName'), variables('databaseName'))]"
+            ],
+            "properties": {
+                "resource": {
+                    "id": "[variables('ViewsContainerName')]",
+                    "partitionKey": {
+                        "paths": [
+                            "/id"
                         ],
                         "kind": "Hash"
                     }
