@@ -191,8 +191,14 @@
                     "ehAuthRuleName": {
                         "value": "[reference('eventhub-linked-template').outputs.ehAuthRuleName.value]"
                     },
+                    "ehAuthRuleKey": {
+                        "value": "[reference('eventhub-linked-template').outputs.ehAuthRuleKey.value]"
+                    },
                     "cosmosAccountName": {
                         "value": "[reference('cosmosdb-linked-template').outputs.accountName.value]"
+                    },
+                    "cosmosAccountKey": {
+                        "value": "[reference('cosmosdb-linked-template').outputs.accountKey.value]"
                     },
                     "cosmosDatabaseName": {
                         "value": "[reference('cosmosdb-linked-template').outputs.databaseName.value]"

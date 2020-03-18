@@ -35,10 +35,22 @@
                 "description": "Name of Event Hub shared access policy."
             }
         },
+        "ehAuthRuleKey": {
+            "type": "string",
+            "metadata": {
+                "description": "Key of Event Hub shared access policy."
+            }
+        },
         "cosmosAccountName": {
             "type": "string",
             "metadata": {
                 "description": "Name of Azure Cosmos DB account."
+            }
+        },
+        "cosmosAccountKey": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Key of Azure Cosmos DB account."
             }
         },
         "cosmosDatabaseName": {
@@ -89,7 +101,8 @@
                     "properties": {
                         "eventHubName": "[parameters('ehName')]",
                         "serviceBusNamespace": "[parameters('ehNamespaceName')]",
-                        "sharedAccessPolicyName": "[parameters('ehAuthRuleName')]"
+                        "sharedAccessPolicyName": "[parameters('ehAuthRuleName')]",
+                        "sharedAccessPolicyKey": "[parameters('ehAuthRuleKey')]"
                     }
                 },
                 "serialization": {
@@ -112,6 +125,7 @@
                     "type": "Microsoft.Storage/DocumentDB",
                     "properties": {
                         "accountId": "[parameters('cosmosAccountName')]",
+                        "accountKey": "[parameters('cosmosAccountKey')]",
                         "database": "[parameters('cosmosDatabaseName')]",
                         "collectionNamePattern": "[parameters('cosmosCollectionName')]",
                         "documentId": "id"
@@ -131,6 +145,7 @@
                     "type": "Microsoft.Storage/DocumentDB",
                     "properties": {
                         "accountId": "[parameters('cosmosAccountName')]",
+                        "accountKey": "[parameters('cosmosAccountKey')]",
                         "database": "[parameters('cosmosDatabaseName')]",
                         "collectionNamePattern": "[parameters('cosmosCollectionName')]",
                         "documentId": "id"
