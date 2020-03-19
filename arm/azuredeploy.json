@@ -208,6 +208,29 @@
                     }
                 }
             }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-05-01",
+            "name": "functions-linked-template",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[uri(deployment().properties.templateLink.uri, 'functions.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "baseName": {
+                        "value": "[parameters('baseName')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "cosmosDbConnectionString": {
+                        "value": "[reference('cosmosdb-linked-template').outputs.cosmosDbConnectionString.value]"
+                    }
+                }
+            }
         }
     ],
     "outputs": {
