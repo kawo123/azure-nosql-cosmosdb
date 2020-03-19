@@ -1,6 +1,7 @@
 # Azure Functions objects
 functions/bin/
 functions/obj/
+functions/package-lock.json
 
 # Terraform
 .terraform/

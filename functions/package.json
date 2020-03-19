@@ -1,0 +1,13 @@
+{
+  "name": "my_package",
+  "description": "",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kawo123/azure-nosql-cosmosdb.git"
+  },
+  "keywords": [],
+  "author": "Ka Wo Fong",
+  "license": "ISC",
+  "homepage": "https://github.com/kawo123/azure-nosql-cosmosdb"
+}
