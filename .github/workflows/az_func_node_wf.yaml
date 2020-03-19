@@ -1,7 +1,7 @@
-
 # Action Requires
-# 1. Setup the AZURE_CREDENTIALS secrets in your GitHub Repository
-# 2. Replace PLEASE_REPLACE_THIS_WITH_YOUR_FUNCTION_APP_NAME with your Azure function app name
+# 1. Setup the AZURE_FUNCTIONAPP_PUBLISH_PROFILE secrets in your GitHub Repository
+# 2. Replace AZURE_FUNCTIONAPP_NAME and AZURE_FUNCTIONAPP_PACKAGE_PATH
+#    with your Azure function app name and app path respectively
 # 3. Add this yaml file to your project's .github/workflows/
 # 4. Push your local project to your GitHub Repository
 
