@@ -44,7 +44,7 @@
     "outputs": {
         "ehNamespaceName": {
             "type": "string",
-            "value": "[reference('eventhub-dr-linked-template').outputs.namespaceName.value]"
+            "value": "[reference('eventhubdr-linked-template').outputs.namespaceName.value]"
         }
     }
 }
