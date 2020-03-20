@@ -2,10 +2,14 @@
 $baseName = "nosql"
 # Enter the location for the first resource group (i.e. eastus)
 $location1 = "eastus"
+# Enter the location for the second resource group (i.e. westus)
+$location2 = "westus"
 
 $resourceGroup1Name = $baseName + "-rg"
+$resourceGroup2Name = $baseName + "dr-rg"
 
 New-AzResourceGroup -Name $resourceGroup1Name -Location $location1
+New-AzResourceGroup -Name $resourceGroup2Name -Location $location2
 
 $templateUri = "https://raw.githubusercontent.com/kawo123/azure-nosql-cosmosdb/master/arm/azuredeploy.json"
 
@@ -13,7 +17,8 @@ $outputs = New-AzResourceGroupDeployment `
     -ResourceGroupName $resourceGroup1Name `
     -TemplateUri $templateUri `
     -baseName $baseName `
-    -location $location1
+    -location1 $location1
+    -location2 $location2
 
 $sqlserverName = $outputs.Outputs["sqlserverName"].value
 $databaseName = $outputs.Outputs["databaseName"].value

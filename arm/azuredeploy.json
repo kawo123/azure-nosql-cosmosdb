@@ -11,15 +11,26 @@
                 "description": "The base name to use as prefix to create all the resources."
             }
         },
-        "location": {
+        "location1": {
             "type": "string",
             "defaultValue": "eastus",
             "metadata": {
-                "description": "Specifies the location for all resources."
+                "description": "Location of primary region."
+            }
+        },
+        "location2": {
+            "type": "string",
+            "defaultValue": "westus",
+            "metadata": {
+                "description": "Location of secondary region."
             }
         }
     },
-    "variables": {},
+    "variables": {
+        "primaryResourceGroup": "[concat(parameters('baseName'),'-rg')]",
+        "drBaseName": "[concat(parameters('baseName'),'dr')]",
+        "secondaryResourceGroup": "[concat(variables('drBaseName'),'-rg')]"
+    },
     "resources": [
         {
             "type": "Microsoft.Resources/deployments",
@@ -36,7 +47,7 @@
                         "value": "[parameters('baseName')]"
                     },
                     "location": {
-                        "value": "[parameters('location')]"
+                        "value": "[parameters('location1')]"
                     }
                 }
             }
@@ -56,7 +67,7 @@
                         "value": "[parameters('baseName')]"
                     },
                     "location": {
-                        "value": "[parameters('location')]"
+                        "value": "[parameters('location1')]"
                     }
                 }
             }
@@ -76,7 +87,7 @@
                         "value": "[parameters('baseName')]"
                     },
                     "location": {
-                        "value": "[parameters('location')]"
+                        "value": "[parameters('location1')]"
                     }
                 }
             }
@@ -96,7 +107,7 @@
                         "value": "[parameters('baseName')]"
                     },
                     "location": {
-                        "value": "[parameters('location')]"
+                        "value": "[parameters('location1')]"
                     }
                 }
             }
@@ -116,7 +127,7 @@
                         "value": "[parameters('baseName')]"
                     },
                     "location": {
-                        "value": "[parameters('location')]"
+                        "value": "[parameters('location1')]"
                     },
                     "sqlSvrFqdn": {
                         "value": "[reference('sqldb-linked-template').outputs.sqlSvrFqdn.value]"
@@ -151,7 +162,7 @@
                         "value": "[parameters('baseName')]"
                     },
                     "location": {
-                        "value": "[parameters('location')]"
+                        "value": "[parameters('location1')]"
                     },
                     "LS_CosmosDb_connectionString": {
                         "value": "[reference('cosmosdb-linked-template').outputs.cosmosDbConnectionString.value]"
@@ -180,7 +191,7 @@
                         "value": "[parameters('baseName')]"
                     },
                     "location": {
-                        "value": "[parameters('location')]"
+                        "value": "[parameters('location1')]"
                     },
                     "ehNamespaceName": {
                         "value": "[reference('eventhub-linked-template').outputs.namespaceName.value]"
@@ -224,10 +235,31 @@
                         "value": "[parameters('baseName')]"
                     },
                     "location": {
-                        "value": "[parameters('location')]"
+                        "value": "[parameters('location1')]"
                     },
                     "cosmosDbConnectionString": {
                         "value": "[reference('cosmosdb-linked-template').outputs.cosmosDbConnectionString.value]"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-05-01",
+            "name": "dr-linked-template",
+            "resourceGroup": "[variables('secondaryResourceGroup')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[uri(deployment().properties.templateLink.uri, 'azuredeploydr.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "baseName": {
+                        "value": "[variables('drBaseName')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location2')]"
                     }
                 }
             }
