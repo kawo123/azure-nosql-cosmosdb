@@ -46,7 +46,10 @@
                     "baseName": {
                         "value": "[parameters('baseName')]"
                     },
-                    "location": {
+                    "location1": {
+                        "value": "[parameters('location1')]"
+                    },
+                    "location2": {
                         "value": "[parameters('location1')]"
                     }
                 }
