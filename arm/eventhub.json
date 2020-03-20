@@ -16,6 +16,13 @@
             "metadata": {
                 "description": "Location for the Cosmos DB account."
             }
+        },
+        "drNamespaceName": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Name of disaster recovery Event Hub namespace."
+            }
         }
     },
     "variables": {
@@ -73,19 +80,34 @@
                             }
                         },
                         {
-                          "apiVersion": "2017-04-01",
-                          "name": "[variables('ehAuthRuleName')]",
-                          "type": "authorizationRules",
-                          "dependsOn": [
-                            "[concat('Microsoft.EventHub/namespaces/', variables('namespaceName'),'/eventhubs/',variables('eventHubName'))]"
-                          ],
-                          "properties": {
-                            "rights": ["Send", "Listen"]
-                          }
+                            "apiVersion": "2017-04-01",
+                            "name": "[variables('ehAuthRuleName')]",
+                            "type": "authorizationRules",
+                            "dependsOn": [
+                                "[concat('Microsoft.EventHub/namespaces/', variables('namespaceName'),'/eventhubs/',variables('eventHubName'))]"
+                            ],
+                            "properties": {
+                                "rights": [
+                                    "Send",
+                                    "Listen"
+                                ]
+                            }
                         }
                     ]
                 }
             ]
+        },
+        {
+            "condition": "[not(equals(parameters('drNamespaceName'), ''))]",
+            "name": "[concat(variables('namespaceName'), '/', parameters('drNamespaceName'), 'DrConfig')]",
+            "type": "Microsoft.EventHub/namespaces/disasterRecoveryConfigs",
+            "apiVersion": "2017-04-01",
+            "dependsOn": [
+                "[concat('Microsoft.EventHub/namespaces/', variables('namespaceName'))]"
+            ],
+            "properties": {
+                "partnerNamespace": "[resourceId('Microsoft.EventHub/namespaces', parameters('drNamespaceName'))]"
+            }
         }
     ],
     "outputs": {
