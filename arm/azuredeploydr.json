@@ -23,11 +23,11 @@
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2018-05-01",
-            "name": "eventhub-dr-linked-template",
+            "name": "eventhubdr-linked-template",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "[uri(deployment().properties.templateLink.uri, 'eventhub.json')]",
+                    "uri": "[uri(deployment().properties.templateLink.uri, 'eventhubdr.json')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
