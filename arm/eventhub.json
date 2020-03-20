@@ -92,19 +92,19 @@
                                     "Listen"
                                 ]
                             }
-                        },
-                        {
-                            "apiVersion": "2017-04-01",
-                            "name": "[variables('ehAliasName')]",
-                            "type": "disasterRecoveryConfigs",
-                            "dependsOn": [
-                                "[concat('Microsoft.EventHub/namespaces/', variables('namespaceName'),'/eventhubs/',variables('eventHubName'))]"
-                            ],
-                            "properties": {
-                                "partnerNamespace": "[parameters('drNamespaceResourceId')]"
-                            }
                         }
                     ]
+                },
+                {
+                    "apiVersion": "2017-04-01",
+                    "name": "[variables('ehAliasName')]",
+                    "type": "disasterRecoveryConfigs",
+                    "dependsOn": [
+                        "[concat('Microsoft.EventHub/namespaces/', variables('namespaceName'))]"
+                    ],
+                    "properties": {
+                        "partnerNamespace": "[parameters('drNamespaceResourceId')]"
+                    }
                 }
             ]
         }
