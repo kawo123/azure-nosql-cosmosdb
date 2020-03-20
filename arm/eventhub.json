@@ -17,7 +17,7 @@
                 "description": "Location for the Cosmos DB account."
             }
         },
-        "drNamespaceName": {
+        "drNamespaceResourceId": {
             "type": "string",
             "metadata": {
                 "description": "Name of disaster recovery Event Hub namespace."
@@ -92,21 +92,21 @@
                                     "Listen"
                                 ]
                             }
+                        },
+                        {
+                            "apiVersion": "2017-04-01",
+                            "name": "[variables('ehAliasName')]",
+                            "type": "disasterRecoveryConfigs",
+                            "dependsOn": [
+                                "[concat('Microsoft.EventHub/namespaces/', variables('namespaceName'),'/eventhubs/',variables('eventHubName'))]"
+                            ],
+                            "properties": {
+                                "partnerNamespace": "[parameters('drNamespaceResourceId')]"
+                            }
                         }
                     ]
                 }
             ]
-        },
-        {
-            "name": "[concat(variables('namespaceName'), '/', variables('ehAliasName'))]",
-            "type": "Microsoft.EventHub/namespaces/disasterRecoveryConfigs",
-            "apiVersion": "2017-04-01",
-            "dependsOn": [
-                "[concat('Microsoft.EventHub/namespaces/', variables('namespaceName'))]"
-            ],
-            "properties": {
-                "partnerNamespace": "[concat(resourceGroup().id, '/providers/Microsoft.EventHub/namespaces/', parameters('drNamespaceName'))]"
-            }
         }
     ],
     "outputs": {

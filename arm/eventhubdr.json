@@ -37,9 +37,9 @@
         }
     ],
     "outputs": {
-        "namespaceName": {
+        "namespaceResourceId": {
             "type": "string",
-            "value": "[variables('namespaceName')]"
+            "value": "[resourceId('Microsoft.EventHub/namespaces', variables('namespaceName'))]"
         }
     }
 }

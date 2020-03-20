@@ -92,8 +92,8 @@
                     "location": {
                         "value": "[parameters('location1')]"
                     },
-                    "drNamespaceName": {
-                        "value": "[reference('dr-linked-template').outputs.ehNamespaceName.value]"
+                    "drNamespaceResourceId": {
+                        "value": "[reference('dr-linked-template').outputs.ehNamespaceResourceId.value]"
                     }
                 }
             }

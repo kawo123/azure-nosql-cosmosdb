@@ -42,9 +42,9 @@
         }
     ],
     "outputs": {
-        "ehNamespaceName": {
+        "ehNamespaceResourceId": {
             "type": "string",
-            "value": "[reference('eventhubdr-linked-template').outputs.namespaceName.value]"
+            "value": "[reference('eventhubdr-linked-template').outputs.namespaceResourceId.value]"
         }
     }
 }
