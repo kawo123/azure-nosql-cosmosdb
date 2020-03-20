@@ -19,7 +19,6 @@
         },
         "drNamespaceName": {
             "type": "string",
-            "defaultValue": "",
             "metadata": {
                 "description": "Name of disaster recovery Event Hub namespace."
             }
@@ -99,16 +98,14 @@
             ]
         },
         {
-            "condition": "[not(equals(parameters('drNamespaceName'), ''))]",
-            "name": "[concat(variables('namespaceName'), '/', parameters('drNamespaceName'), 'DrConfig')]",
+            "name": "[concat(variables('namespaceName'), '/', variables('ehAliasName'))]",
             "type": "Microsoft.EventHub/namespaces/disasterRecoveryConfigs",
             "apiVersion": "2017-04-01",
             "dependsOn": [
                 "[concat('Microsoft.EventHub/namespaces/', variables('namespaceName'))]"
             ],
             "properties": {
-                "partnerNamespace": "[resourceId('Microsoft.EventHub/namespaces', parameters('drNamespaceName'))]",
-                "alternateName": "[variables('ehAliasName')]"
+                "partnerNamespace": "[concat(resourceGroup().id, '/providers/Microsoft.EventHub/namespaces/', parameters('drNamespaceName'))]"
             }
         }
     ],
