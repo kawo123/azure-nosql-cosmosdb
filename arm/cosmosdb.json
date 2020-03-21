@@ -26,7 +26,7 @@
         },
         "throughput": {
             "type": "int",
-            "defaultValue": 800,
+            "defaultValue": 1500,
             "minValue": 400,
             "maxValue": 1000000,
             "metadata": {
@@ -241,7 +241,7 @@
         },
         "cosmosDbConnectionString": {
             "type": "string",
-            "value": "[listConnectionStrings(resourceId('Microsoft.DocumentDB/databaseAccounts', variables('accountName')), '2019-12-12').connectionStrings[0].connectionString]"
+            "value": "[concat(listConnectionStrings(resourceId('Microsoft.DocumentDB/databaseAccounts', variables('accountName')), '2019-12-12').connectionStrings[0].connectionString, 'Database=', variables('databaseName'))]"
         }
     }
 }

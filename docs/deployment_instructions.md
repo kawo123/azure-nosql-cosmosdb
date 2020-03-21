@@ -31,6 +31,8 @@
     $baseName = "nosql"
     # Enter the location for the first resource group (i.e. eastus)
     $location1 = "eastus"
+    # Enter the location for the second resource group (i.e. westus)
+    $location2 = "westus"
     ```
 
 6. Press **F5** to run the script, this will do the following:

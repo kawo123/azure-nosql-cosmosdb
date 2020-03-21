@@ -17,7 +17,7 @@ $outputs = New-AzResourceGroupDeployment `
     -ResourceGroupName $resourceGroup1Name `
     -TemplateUri $templateUri `
     -baseName $baseName `
-    -location1 $location1
+    -location1 $location1`
     -location2 $location2
 
 $sqlserverName = $outputs.Outputs["sqlserverName"].value
