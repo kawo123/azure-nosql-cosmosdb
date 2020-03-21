@@ -3,6 +3,7 @@
   "Values": {
     "FUNCTIONS_WORKER_RUNTIME": "node",
     "AzureWebJobsStorage": "<connection-string>",
-    "CosmosDBConnection": "<cosmosdb-connection-string>"
+    "CosmosDBConnection": "<cosmosdb-connection-string>",
+    "EventHubReaderConnection": "<eventhub-connection-string>"
   }
 }
