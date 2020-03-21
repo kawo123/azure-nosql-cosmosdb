@@ -116,7 +116,7 @@
         {
             "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
             "apiVersion": "2017-04-01-preview",
-            "name": "[concat(variables('streamAnalyticsJobName'), '/outputCosmosDbDailySummary')]",
+            "name": "[concat(variables('streamAnalyticsJobName'), '/outputCosmosDb5MinSummary')]",
             "dependsOn": [
                 "[resourceId('Microsoft.StreamAnalytics/streamingjobs', variables('streamAnalyticsJobName'))]"
             ],
@@ -136,7 +136,7 @@
         {
             "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
             "apiVersion": "2017-04-01-preview",
-            "name": "[concat(variables('streamAnalyticsJobName'), '/outputCosmosDbHourlySummary')]",
+            "name": "[concat(variables('streamAnalyticsJobName'), '/outputCosmosDbMinuteSummary')]",
             "dependsOn": [
                 "[resourceId('Microsoft.StreamAnalytics/streamingjobs', variables('streamAnalyticsJobName'))]"
             ],
@@ -162,7 +162,7 @@
             ],
             "properties": {
                 "streamingUnits": 3,
-                "query": "SELECT\r\n    'order-count-in-this-hour' as id,\r\n    COUNT(*) as [Count],\r\n    System.Timestamp() AS WindowEnd\r\nINTO\r\n    outputCosmosDbHourlySummary\r\nFROM\r\n    inputEh\r\nGROUP BY TumblingWindow(hour, 1)\r\n\r\nSELECT\r\n    'daily-summary' as id,\r\n    COUNT(*) as [dailyCount],\r\n    SUM(Total) as [dailyTotal],\r\n    System.Timestamp() AS WindowEnd\r\nINTO\r\n    outputCosmosDbDailySummary\r\nFROM\r\n    inputEh\r\nGROUP BY TumblingWindow(day, 1)\r\n"
+                "query": "SELECT\r\n    'order-count-in-this-min' as id,\r\n    COUNT(*) as [Count],\r\n    System.Timestamp() AS WindowEnd\r\nINTO\r\n    outputCosmosDbMinuteSummary\r\nFROM\r\n    inputEh\r\nGROUP BY TumblingWindow(minute, 1)\r\n\r\nSELECT\r\n    '5min-summary' as id,\r\n    COUNT(*) as [count],\r\n    SUM(Total) as [total],\r\n    System.Timestamp() AS WindowEnd\r\nINTO\r\n    outputCosmosDb5MinSummary\r\nFROM\r\n    inputEh\r\nGROUP BY TumblingWindow(minute, 5)\r\n"
             }
         }
     ],

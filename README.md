@@ -27,6 +27,7 @@ This project demostrates the capabilities of Azure Cosmos DB
 
 - Follow [data generator instructions](./docs/data_generator_instructions.md) to generate dummy events
 
+- Start stream analytics job to generate views for aggregated metrics
 
 ## References
 
