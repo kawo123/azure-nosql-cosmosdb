@@ -9,5 +9,8 @@
   "keywords": [],
   "author": "Ka Wo Fong",
   "license": "ISC",
-  "homepage": "https://github.com/kawo123/azure-nosql-cosmosdb"
+  "homepage": "https://github.com/kawo123/azure-nosql-cosmosdb",
+  "dependencies": {
+    "uuid": "^7.0.2"
+  }
 }

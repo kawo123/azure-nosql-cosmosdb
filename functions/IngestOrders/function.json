@@ -1,0 +1,23 @@
+{
+  "bindings": [
+    {
+      "type": "eventHubTrigger",
+      "name": "triggerEvents",
+      "direction": "in",
+      "eventHubName": "telemetry",
+      "connection": "EventHubConnection",
+      "cardinality": "many",
+      "consumerGroup": "ingest-orders"
+    },
+    {
+        "name": "outputDocuments",
+        "type": "cosmosDB",
+        "databaseName": "MoviesDB",
+        "collectionName": "Orders",
+        "createIfNotExists": false,
+        "partitionKey": "/OrderID",
+        "connectionStringSetting": "CosmosDBConnection",
+        "direction": "out"
+    }
+  ]
+}
