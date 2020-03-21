@@ -45,7 +45,9 @@
             "createIfNotExists": false,
             "partitionKey": "/id",
             "connectionStringSetting": "CosmosDBConnection",
-            "direction": "out"
+            "direction": "out",
+            "useMultipleWriteLocations": true,
+            "preferredLocations": "AzureRegion"
         }
     ]
 }
