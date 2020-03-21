@@ -13,7 +13,8 @@ on:
     - master
 
 env:
-  AZURE_FUNCTIONAPP_NAME: nosqlkwf-func         # set this to your application's name
+  AZURE_FUNCTIONAPP_NAME: nosqlkf-func          # set this to your application's name
+  AZURE_DR_FUNCTIONAPP_NAME: nosqlkfdr-func     # set this to your application's name
   AZURE_FUNCTIONAPP_PACKAGE_PATH: './functions' # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '10.x'                          # set this to the node version to use (supports 8.x, 10.x, 12.x)
 
@@ -61,3 +62,11 @@ jobs:
     - name: 'use the published functionapp url in upcoming steps'
       run: |
         echo "${{ steps.fa.outputs.app-url }}"
+
+    - name: 'Run Azure Functions Action for DR'
+      uses: Azure/functions-action@v1
+      id: fadr
+      with:
+        app-name: ${{ env.AZURE_DR_FUNCTIONAPP_NAME }}
+        package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+        publish-profile: ${{ secrets.AZURE_DR_FUNCTIONAPP_PUBLISH_PROFILE }}
