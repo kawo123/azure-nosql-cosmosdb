@@ -39,7 +39,6 @@ This project demostrates the capabilities of Azure Cosmos DB
 
 ## Next Steps
 
-- [] Debug Function cannot start error
 - [] DR
 
 ---

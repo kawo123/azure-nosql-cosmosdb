@@ -22,6 +22,12 @@
         "metadata": {
           "description": "Connection string for Azure Cosmos DB account."
         }
+      },
+      "eventHubConnectionString": {
+        "type": "securestring",
+        "metadata": {
+          "description": "Connection string for Azure Event Hub."
+        }
       }
     },
     "variables": {
@@ -107,6 +113,14 @@
               {
                 "name": "CosmosDBConnection",
                 "value": "[parameters('cosmosDbConnectionString')]"
+              },
+              {
+                "name": "EventHubConnection",
+                "value": "[parameters('eventHubConnectionString')]"
+              },
+              {
+                "name": "AzureRegion",
+                "value": "[parameters('location')]"
               }
             ]
           }

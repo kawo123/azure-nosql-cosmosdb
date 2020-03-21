@@ -2,6 +2,8 @@
 functions/bin/
 functions/obj/
 functions/package-lock.json
+functions/node_modules/
+
 
 # Terraform
 .terraform/
