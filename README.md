@@ -26,8 +26,11 @@ This project demostrates the capabilities of Azure Cosmos DB
   - Follow the steps under the section "[Using Publish Profile as Deployment Credential](https://github.com/marketplace/actions/azure-functions-action#using-publish-profile-as-deployment-credential-recommended)"
 
 - Follow [data generator instructions](./docs/data_generator_instructions.md) to generate dummy events
+  - Use Event Hub alias as part of the connection string for automatic failover when necessary
 
 - Start stream analytics job to generate views for aggregated metrics
+
+- Create new document (it could be any valid Cosmos DB document) in `MoviesDB.Items` collection and observe new views created by Azure Functions
 
 ## References
 
@@ -36,9 +39,7 @@ This project demostrates the capabilities of Azure Cosmos DB
 
 ## Next Steps
 
-- [] IaC: Azure Stream Analytics
-- [] IaC: Azure Functions
-- [] DB Schema Before & After + requirements
+- [] Debug Function cannot start error
 - [] DR
 
 ---

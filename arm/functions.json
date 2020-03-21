@@ -101,6 +101,10 @@
                 "value": "node"
               },
               {
+                "name": "WEBSITE_NODE_DEFAULT_VERSION",
+                "value": "~10"
+              },
+              {
                 "name": "CosmosDBConnection",
                 "value": "[parameters('cosmosDbConnectionString')]"
               }

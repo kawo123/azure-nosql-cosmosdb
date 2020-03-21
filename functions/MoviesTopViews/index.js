@@ -1,4 +1,5 @@
 module.exports = async function (context, documents) {
+    console.log("Generating MoviesDB top views...");
 
     // if (!!documents && documents.length > 0) {
     //     context.log('Document Id: ', documents[0].id);
