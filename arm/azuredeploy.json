@@ -93,7 +93,7 @@
                         "value": "[parameters('location1')]"
                     },
                     "drNamespaceResourceId": {
-                        "value": "[reference('dr-linked-template').outputs.ehNamespaceResourceId.value]"
+                        "value": "[reference('eventhubdr-linked-template').outputs.namespaceResourceId.value]"
                     }
                 }
             }
@@ -255,12 +255,12 @@
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2018-05-01",
-            "name": "dr-linked-template",
+            "name": "eventhubdr-linked-template",
             "resourceGroup": "[variables('secondaryResourceGroup')]",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "[uri(deployment().properties.templateLink.uri, 'azuredeploydr.json')]",
+                    "uri": "[uri(deployment().properties.templateLink.uri, 'eventhubdr.json')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -269,6 +269,33 @@
                     },
                     "location": {
                         "value": "[parameters('location2')]"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-05-01",
+            "name": "functionsdr-linked-template",
+            "resourceGroup": "[variables('secondaryResourceGroup')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[uri(deployment().properties.templateLink.uri, 'functions.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "baseName": {
+                        "value": "[variables('drBaseName')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location2')]"
+                    },
+                    "cosmosDbConnectionString": {
+                        "value": "[reference('cosmosdb-linked-template').outputs.cosmosDbConnectionString.value]"
+                    },
+                    "eventHubConnectionString": {
+                        "value": "[reference('eventhub-linked-template').outputs.ehConnectionString.value]"
                     }
                 }
             }

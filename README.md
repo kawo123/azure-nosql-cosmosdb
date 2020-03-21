@@ -22,7 +22,7 @@ This project demostrates the capabilities of Azure Cosmos DB
   - Open notebook `request_unit_estimator_cosmosdb.ipynb` and run all cells to estimate total RUs for required queries
 
 - To configure GitHub Actions to continuous integrate & deploy to Azure Functions, take the below steps
-  - In `.github/workflows/az_func_node_wf.yaml`, replace value of `AZURE_FUNCTIONAPP_NAME` (line 16) with the name of your deployed Function
+  - In `.github/workflows/az_func_node_wf.yaml`, replace value of `AZURE_FUNCTIONAPP_NAME` (line 16) and `AZURE_DR_FUNCTIONAPP_NAME` (line 17) with the names of your deployed Functions
   - Follow the steps under the section "[Using Publish Profile as Deployment Credential](https://github.com/marketplace/actions/azure-functions-action#using-publish-profile-as-deployment-credential-recommended)"
 
 - Follow [data generator instructions](./docs/data_generator_instructions.md) to generate dummy events
