@@ -47,7 +47,7 @@
             "connectionStringSetting": "CosmosDBConnection",
             "direction": "out",
             "useMultipleWriteLocations": true,
-            "preferredLocations": "AzureRegion"
+            "preferredLocations": "%AzureRegion%"
         }
     ]
 }

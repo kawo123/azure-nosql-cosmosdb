@@ -1,10 +1,10 @@
 # NoSQL on Azure: Azure Cosmos DB
 
-This project demostrates the capabilities of Azure Cosmos DB
+This project demostrates the capabilities of distributed serverless processing using Azure Event Hub as distributed message broker, Azure Stream Analytics and Azure Functions as stream processor, and Azure Cosmos DB as multi-master NoSQL database.
 
 ## Prerequisite
 
-- TODO
+- PowerShell
 
 ## Getting Started
 
@@ -42,10 +42,6 @@ This project demostrates the capabilities of Azure Cosmos DB
 
 - [Azure Cosmos DB Overview](https://docs.microsoft.com/en-us/azure/cosmos-db/distribute-data-globally)
 - [Contoso Video SQL Server Schema](https://github.com/kawo123/nosql-openhack/blob/master/database-schema/README.md)
-
-## Next Steps
-
-- [] DR
 
 ---
 
