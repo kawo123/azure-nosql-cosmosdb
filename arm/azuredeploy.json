@@ -247,7 +247,7 @@
                         "value": "[reference('cosmosdb-linked-template').outputs.cosmosDbConnectionString.value]"
                     },
                     "eventHubConnectionString": {
-                        "value": "[reference('eventhub-linked-template').outputs.ehConnectionString.value]"
+                        "value": "[reference('eventhub-linked-template').outputs.ehPrimaryConnectionString.value]"
                     }
                 }
             }
@@ -295,7 +295,7 @@
                         "value": "[reference('cosmosdb-linked-template').outputs.cosmosDbConnectionString.value]"
                     },
                     "eventHubConnectionString": {
-                        "value": "[reference('eventhub-linked-template').outputs.ehConnectionString.value]"
+                        "value": "[reference('eventhub-linked-template').outputs.ehAliasConnectionString.value]"
                     }
                 }
             }

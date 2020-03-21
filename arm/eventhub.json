@@ -126,7 +126,11 @@
             "type": "string",
             "value": "[listKeys(resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules', variables('namespaceName'), variables('eventHubName'), variables('ehAuthRuleName')), '2017-04-01').primaryKey]"
         },
-        "ehConnectionString": {
+        "ehPrimaryConnectionString": {
+            "type": "string",
+            "value": "[listKeys(resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules', variables('namespaceName'), variables('eventHubName'), variables('ehAuthRuleName')), '2017-04-01').primaryConnectionString]"
+        },
+        "ehAliasConnectionString": {
             "type": "string",
             "value": "[listKeys(resourceId('Microsoft.EventHub/namespaces/eventhubs/authorizationRules', variables('namespaceName'), variables('eventHubName'), variables('ehAuthRuleName')), '2017-04-01').aliasPrimaryConnectionString]"
         }
