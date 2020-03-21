@@ -2,7 +2,7 @@
 
 This project demostrates the capabilities of distributed serverless processing using Azure Event Hub as distributed message broker, Azure Stream Analytics and Azure Functions as stream processor, and Azure Cosmos DB as multi-master NoSQL database.
 
-![Azure NoSQL Cosmos DB Architecture](./docs/architecture.png "Azure NoSQL Cosmos DB Architecture")
+![Azure NoSQL Cosmos DB Architecture](./docs/architecture.jpg "Azure NoSQL Cosmos DB Architecture")
 
 ## Prerequisite
 
