@@ -29,7 +29,7 @@
         "eventhubSku": "Standard",
         "skuCapacity": 1,
         "eventHubName": "telemetry",
-        "consumerGroupName": "$Default",
+        "consumerGroupName": "ingest-orders",
         "ehAuthRuleName": "SendListener",
         "ehAliasName": "[concat(parameters('baseName'),'-eh-alias')]"
     },
@@ -74,10 +74,7 @@
                             "type": "consumergroups",
                             "dependsOn": [
                                 "[concat('Microsoft.EventHub/namespaces/', variables('namespaceName'),'/eventhubs/',variables('eventHubName'))]"
-                            ],
-                            "properties": {
-                                "userMetadata": "User Metadata goes here"
-                            }
+                            ]
                         },
                         {
                             "apiVersion": "2017-04-01",

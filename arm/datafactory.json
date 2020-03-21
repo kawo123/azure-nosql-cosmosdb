@@ -1236,5 +1236,10 @@
             ]
         }
     ],
-    "outputs": {}
+    "outputs": {
+        "factoryName": {
+            "type": "string",
+            "value": "[variables('factoryName')]"
+        }
+    }
 }

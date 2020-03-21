@@ -317,6 +317,10 @@
         "sqlAdministratorLoginPassword": {
             "type": "string",
             "value": "[reference('sqldb-linked-template').outputs.sqlAdministratorLoginPassword.value]"
+        },
+        "dataFactoryName": {
+            "type": "string",
+            "value": "[reference('datafactory-linked-template').outputs.factoryName.value]"
         }
     }
 }
