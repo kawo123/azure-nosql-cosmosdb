@@ -32,6 +32,12 @@ This project demostrates the capabilities of Azure Cosmos DB
 
 - Create new document (it could be any valid Cosmos DB document) in `MoviesDB.Items` collection and observe new views created by Azure Functions
 
+- Observe that both primary and DR Azure Functions are consuming events because the primary Function is using the primary Event Hub connection string while the DR Function is using the Event Hub alias connection string. Essentially, they are consuming from the primary Event Hub
+  - Change the Event Hub connection string for the DR Function to be the connection string of the DR Event Hub
+  - Observe that **primary function is executing** while DR function is idle
+  - Execute failover for Event Hub Geo-DR pairing
+  - Now, observe that primary function is idle while **DR function is executing**
+
 ## References
 
 - [Azure Cosmos DB Overview](https://docs.microsoft.com/en-us/azure/cosmos-db/distribute-data-globally)

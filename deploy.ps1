@@ -17,14 +17,16 @@ $outputs = New-AzResourceGroupDeployment `
     -ResourceGroupName $resourceGroup1Name `
     -TemplateUri $templateUri `
     -baseName $baseName `
-    -location1 $location1`
+    -location1 $location1 `
     -location2 $location2
 
 $sqlserverName = $outputs.Outputs["sqlserverName"].value
 $databaseName = $outputs.Outputs["databaseName"].value
 $sqlAdministratorLogin = $outputs.Outputs["sqlAdministratorLogin"].value
 $sqlAdministratorLoginPassword = $outputs.Outputs["sqlAdministratorLoginPassword"].value
+$dataFactoryName = $outputs.Outputs["dataFactoryName"].value
 
+# Import BACPAC to Azure SQL DB
 $importRequest = New-AzSqlDatabaseImport -ResourceGroupName $resourceGroup1Name `
     -ServerName $sqlserverName -DatabaseName $databaseName `
     -DatabaseMaxSizeBytes "5000000" `
@@ -35,9 +37,11 @@ $importRequest = New-AzSqlDatabaseImport -ResourceGroupName $resourceGroup1Name 
     -AdministratorLogin $sqlAdministratorLogin `
     -AdministratorLoginPassword $(ConvertTo-SecureString -String $sqlAdministratorLoginPassword -AsPlainText -Force)
 
-$importStatus = Get-AzSqlDatabaseImportExportStatus -OperationStatusLink $importRequest.OperationStatusLink
 
+# Check database import status
+$importStatus = Get-AzSqlDatabaseImportExportStatus -OperationStatusLink $importRequest.OperationStatusLink
 [Console]::Write("Importing database")
+
 while ($importStatus.Status -eq "InProgress") {
     $importStatus = Get-AzSqlDatabaseImportExportStatus -OperationStatusLink $importRequest.OperationStatusLink
     [Console]::Write(".")
@@ -46,3 +50,26 @@ while ($importStatus.Status -eq "InProgress") {
 
 [Console]::WriteLine("")
 $importStatus
+
+# Trigger Azure Data Factory migration pipeline
+$pipelineRunId = Invoke-AzDataFactoryV2Pipeline -ResourceGroupName $resourceGroup1Name `
+    -DataFactoryName $dataFactoryName `
+    -PipelineName "PL_Migrate_AzureSql_To_CosmosDb"
+
+# Check DB migration status
+$migrationStatus = Get-AzDataFactoryV2PipelineRun -ResourceGroupName $resourceGroup1Name `
+    -DataFactoryName $dataFactoryName `
+    -PipelineRunId $pipelineRunId
+
+[Console]::Write("Migration running")
+
+while ($migrationStatus.Status -eq "InProgress") {
+    $migrationStatus = Get-AzDataFactoryV2PipelineRun -ResourceGroupName $resourceGroup1Name `
+        -DataFactoryName $dataFactoryName `
+        -PipelineRunId $pipelineRunId
+    [Console]::Write(".")
+    Start-Sleep -s 10
+}
+
+[Console]::WriteLine("")
+$migrationStatus
