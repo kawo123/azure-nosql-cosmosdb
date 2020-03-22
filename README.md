@@ -44,6 +44,7 @@ This project demostrates the capabilities of distributed serverless processing u
 
 - [Azure Cosmos DB Overview](https://docs.microsoft.com/en-us/azure/cosmos-db/distribute-data-globally)
 - [Contoso Video SQL Server Schema](https://github.com/kawo123/nosql-openhack/blob/master/database-schema/README.md)
+- [Gotchas](./docs/gotchas.md)
 
 ---
 
